@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { removeATask } from '../utils/APIOperations';
+import { editATask, removeATask } from '../utils/APIOperations';
 import TaskFieldText from './TaskFieldText';
 
 function TaskItem (item) {
@@ -13,28 +13,50 @@ function TaskItem (item) {
 
   const deleteItem = async () => {
     await removeATask(_id)
-    await setUpdated(true)
+    await setUpdated()
   }
 
-  console.log(_id)
+  const editedObj = {
+    
+      name: inputName, status:inputStatus, task:inputTask, date:inputDate
+    
+  }
+
+  const editItem = async () => {
+    await editATask(_id, editedObj)
+    await setUpdated()
+  } 
+
+  const cancelEditing = async () => {
+    setEditing(!isEditing)
+    await setUpdated()
+  }
+
+  const tdClassname = isEditing ? 'editing' : ''
+
   return (
     <tr>
-      <td>
+      <td className={tdClassname}>
         <TaskFieldText text={name} inputText={inputName} setText={setName} editing={isEditing}/>
       </td>
-      <td>
+      <td className={tdClassname}>
       <TaskFieldText text={task} inputText={inputTask} setText={setTask} editing={isEditing}/>
       </td>
-      <td>
+      <td className={tdClassname}>
       <TaskFieldText text={status} inputText={inputStatus} setText={setStatus} editing={isEditing}/>
       </td>
-      <td>
+      <td className={tdClassname}>
       <TaskFieldText text={date} inputText={inputDate} setText={setDate} editing={isEditing}/>
       </td>
-      <td>
-        <button onClick={()=> setEditing(!isEditing)}>editar</button>
-        <button onClick={async ()=> {deleteItem()}}>remover</button>
-      </td>
+      {isEditing 
+      ? <td className={`action editing`}>
+        <button className='green' onClick={async ()=> {editItem()}}>confirmar</button>
+        <button className='red' onClick={()=> cancelEditing()}>cancelar</button>
+        </td>
+      : <td className='action'>
+        <button className='green' onClick={()=> {setEditing(!isEditing)}}>editar</button>
+        <button className='red' onClick={async ()=> {deleteItem()}}>remover</button>
+      </td>}
     </tr>
   )
 }

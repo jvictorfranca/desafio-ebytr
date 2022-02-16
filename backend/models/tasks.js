@@ -27,7 +27,6 @@ const findById = async (id) => {
 }
   const task = await conn.collection('tasks').findOne({_id: ObjectId(id)});
   if (!task) {
-    console.log('deu ruim')
     return null}
   return task;
 };

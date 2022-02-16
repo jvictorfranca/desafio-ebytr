@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 function TaskFieldText (props) {
   const {text, inputText, setText, editing} = props
+  
   return(    
     editing
     ? <input type="text" value={inputText} onChange={e=>setText(e.target.value)} />

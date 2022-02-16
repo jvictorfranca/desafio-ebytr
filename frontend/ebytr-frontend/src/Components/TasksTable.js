@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getAllTasks } from '../utils/APIOperations';
+import AddTaskBar from './AddTaskBar';
 import TaskItem from './TaskItem';
 
 function TasksTable () {
@@ -29,7 +30,7 @@ function TasksTable () {
       </tr>
     </thead>
     <tbody>
-
+    <AddTaskBar setUpdated = {setUpdatedFunction}/>
       {data.map((task)=>  <TaskItem item={task} key={task._id} setUpdated = {setUpdatedFunction}/>
       )}
     </tbody>

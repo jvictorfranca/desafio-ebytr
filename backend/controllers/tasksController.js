@@ -7,7 +7,8 @@ const {
  } = require('../services/tasksService');
 
 const createTaskController = async (req, res, next) => {
- try {
+ console.log(req.body)
+  try {
    const answerObject = await createTask(
      req.body.name, req.body.task, req.body.date, req.body.status,
      );
