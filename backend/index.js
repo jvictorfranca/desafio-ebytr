@@ -5,7 +5,8 @@ require('dotenv').config()
 const {
    createTaskController,
    findTasksController,
-   findTaskByIdController
+   findTaskByIdController,
+   updateTaskByIdController
    } = require('./controllers/tasksController');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 require('dotenv').config()
@@ -24,6 +25,8 @@ app.get('/tasks', findTasksController)
 app.get('/tasks/:id', findTaskByIdController)
 
 app.post('/tasks', createTaskController)
+
+app.put('/tasks/:id', updateTaskByIdController);
 
 app.use(errorMiddleware);
 

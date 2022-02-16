@@ -30,8 +30,17 @@ const findById = async (id) => {
   return task;
 };
 
+const updateById = async (id, name, task, date, status) => {
+  const conn = await connect();
+  const { insertedId } = await
+   conn.collection('tasks')
+   .updateOne({ _id: ObjectId(id) }, { $set: { name, task, date, status } });
+  return insertedId;
+};
+
 module.exports = {
   create,
   find,
-  findById
+  findById,
+  updateById
 };
