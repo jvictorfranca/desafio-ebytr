@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 require('dotenv').config()
 
-const { createTaskController } = require('./controllers/tasksController');
+const { createTaskController, findTasksController } = require('./controllers/tasksController');
 const errorMiddleware = require('./middlewares/errorMiddleware');
 require('dotenv').config()
 
@@ -15,6 +15,8 @@ app.use(bodyParser.json())
 app.get('/', ( request,response ) => {
 
 })
+
+app.get('/tasks', findTasksController)
 
 app.post('/tasks', createTaskController)
 

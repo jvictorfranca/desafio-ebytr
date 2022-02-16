@@ -1,6 +1,6 @@
 const INVALID_ENTRIES_MESSAGE = 'Invalid entries. Try again.';
 
-const { create } = require('../models/tasks');
+const { create, find } = require('../models/tasks');
 
 const errorObjectCreator = (status, message) => ({
   status,
@@ -29,6 +29,14 @@ const createdId = await create(name, task, date, status);
   };
 };
 
+const findTasks = async () => {
+  const tasks = await find();
+  if (!tasks) { return { answer: { message: 'Not Found' }, status: 404 }; }
+  return { answer: tasks, status: 200 };
+};
+
+
 module.exports = {
-  createTask
+  createTask,
+  findTasks
 }
