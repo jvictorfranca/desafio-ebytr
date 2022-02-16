@@ -91,6 +91,11 @@ button.red{
   background-color: rgb(204, 97, 97);
 }
 
+select{
+  text-align: center;
+  height: 40%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
