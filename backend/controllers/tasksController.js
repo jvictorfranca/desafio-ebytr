@@ -2,7 +2,8 @@ const {
   createTask,
   findTasks,
   findTaskById,
-  updateTaskByIdService, 
+  updateTaskByIdService,
+  deleteTaskByIdService, 
  } = require('../services/tasksService');
 
 const createTaskController = async (req, res, next) => {
@@ -54,9 +55,24 @@ const updateTaskByIdController = async (req, res, next) => {
 }
 };
 
+const deleteTaskByIdController = async (req, res, next) => {
+  try {
+ const { id } = req.params;
+  
+  const answerObject = await deleteTaskByIdService( 
+    id, req.tokenData,
+    );
+  return res.status(answerObject.status).json(answerObject.answer);
+} catch (err) {
+  console.error(err.answer.message);
+  next(err);
+}
+};
+
 module.exports = {
   createTaskController,
   findTasksController,
   findTaskByIdController,
-  updateTaskByIdController
+  updateTaskByIdController,
+  deleteTaskByIdController
 }
