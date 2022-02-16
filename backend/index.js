@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 require('dotenv').config()
+const cors = require('cors')
 
 const {
    createTaskController,
@@ -15,7 +16,7 @@ require('dotenv').config()
 const PORT = process.env.PORT || 3001
 const app = express()
 
-
+app.use(cors())
 app.use(bodyParser.json())
 
 app.get('/', ( request,response ) => {
