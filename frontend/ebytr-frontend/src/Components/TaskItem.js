@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { editATask, removeATask } from '../utils/APIOperations';
 import TaskFieldText from './TaskFieldText';
+import TaskSelectText from './TaskSelectText';
 
 function TaskItem (item) {
   const { _id, name, status, task, date} = item.item
@@ -10,6 +11,14 @@ function TaskItem (item) {
   const [inputTask, setTask] = useState(task)
   const [inputDate, setDate] = useState(date)
   const [isEditing, setEditing] = useState(false)
+
+  
+  const changeAndUpdate = async(value)=> {
+    const newOBJ = {...editedObj, status: value}
+    await editATask(_id, newOBJ)
+    await setUpdated()
+
+  }
 
   const deleteItem = async () => {
     await removeATask(_id)
@@ -43,7 +52,7 @@ function TaskItem (item) {
       <TaskFieldText text={task} inputText={inputTask} setText={setTask} editing={isEditing}/>
       </td>
       <td className={tdClassname}>
-      <TaskFieldText text={status} inputText={inputStatus} setText={setStatus} editing={isEditing}/>
+      <TaskSelectText inputText={inputStatus} editing={isEditing} setText={setStatus} editFunction = {changeAndUpdate}/>
       </td>
       <td className={tdClassname}>
       <TaskFieldText text={date} inputText={inputDate} setText={setDate} editing={isEditing}/>

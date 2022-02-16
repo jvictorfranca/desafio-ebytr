@@ -4,7 +4,7 @@ import { createATask } from '../utils/APIOperations';
 function AddTaskBar (item) {
   const {setUpdated} = item
   const [inputName, setName] = useState('')
-  const [inputStatus, setStatus] = useState('')
+  const [inputStatus, setStatus] = useState('Pendente')
   const [inputTask, setTask] = useState('')
   const [inputDate, setDate] = useState('')
 
@@ -21,7 +21,7 @@ function AddTaskBar (item) {
     setName('')
     setTask('')
     setDate('')
-    setStatus('')
+    setStatus('Pendente')
   }
   return (
     <tr>
@@ -32,7 +32,11 @@ function AddTaskBar (item) {
       <input type='text' value={inputTask} onChange={(e)=> setTask(e.target.value)} />
       </td>
       <td>
-      <input type='text' value={inputStatus} onChange={(e)=> setStatus(e.target.value)} />
+      <select value = {inputStatus} onChange={(e)=> setStatus(e.target.value)}>
+        <option value='Pendente'>Pendente</option>
+        <option value='Em andamento'>Em andamento</option>
+        <option value='Pronto'>Pronto</option>
+      </select>
       </td>
       <td>
       <input type='text' value={inputDate} onChange={(e)=> setDate(e.target.value)} />
