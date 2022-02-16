@@ -1,4 +1,6 @@
 const connect = require('./connection');
+const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb');
 
 const create = async (name, task, date, status) => {
   const conn = await connect();
@@ -18,7 +20,18 @@ const find = async () => {
   return tasks;
 };
 
+const findById = async (id) => {
+  const conn = await connect();
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return null; 
+}
+  const task = await conn.collection('tasks').findOne(ObjectId(id));
+  if (!task) return null;
+  return task;
+};
+
 module.exports = {
   create,
-  find
+  find,
+  findById
 };

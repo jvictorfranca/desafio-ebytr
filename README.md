@@ -11,6 +11,7 @@ mongodbcd
 react
 eslint
 dotenv
+mongoose
 
 mocha
 chai
