@@ -60,8 +60,7 @@ const deleteTaskByIdController = async (req, res, next) => {
  const { id } = req.params;
   
   const answerObject = await deleteTaskByIdService( 
-    id, req.tokenData,
-    );
+    id  );
   return res.status(answerObject.status).json(answerObject.answer);
 } catch (err) {
   console.error(err.answer.message);

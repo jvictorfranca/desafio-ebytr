@@ -25,8 +25,10 @@ const findById = async (id) => {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return null; 
 }
-  const task = await conn.collection('tasks').findOne(ObjectId(id));
-  if (!task) return null;
+  const task = await conn.collection('tasks').findOne({_id: ObjectId(id)});
+  if (!task) {
+    console.log('deu ruim')
+    return null}
   return task;
 };
 

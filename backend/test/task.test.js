@@ -143,7 +143,8 @@ describe('2- Endpoint para listar todas as tasks', () => {
       .then((response) => {
         const { body } = response;
         const result = JSON.parse(body);
-        expect(JSON.stringify(result)).toBe(JSON.stringify(mockedtasks));
+        expect(result[0].name).toBe('Naruto');
+        expect(result[1].name).toBe('Goku');
       });
   })
 })
