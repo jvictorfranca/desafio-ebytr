@@ -4,9 +4,12 @@ import AddTaskBar from './AddTaskBar';
 import TaskItem from './TaskItem';
 
 function TasksTable () {
+
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState([])
+  const [sorted, setSorted] = useState('')
   const [updated, setUpdated] = useState(0)
+  
   useEffect(async ()=> {
     setLoading(true);
     const tasks = await getAllTasks();
@@ -18,6 +21,7 @@ function TasksTable () {
   const setUpdatedFunction = async () => {
     setUpdated(updated+1)
   }
+
   return loading ? <p>Loading</p> : (
   <table>
     <thead>
