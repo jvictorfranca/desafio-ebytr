@@ -13,6 +13,8 @@
   }
 }
 
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -52,6 +54,12 @@ th{
   color: antiquewhite;
   font-size: 30px;
   border-left: 1px solid antiquewhite;
+  justify-content: center;
+
+}
+
+th button {
+  width: 30px;
 }
 
 td{
