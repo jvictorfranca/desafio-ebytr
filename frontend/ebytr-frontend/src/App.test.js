@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, findAllByText, fireEvent, render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import React from 'react';
 
@@ -66,5 +66,16 @@ describe('1 - Fazer uma requisição para API de tasks e renderiza as tasks corr
       render(<App />);
     });
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(5);
+  });
+  
+
+  it('Verifique botões de ação', async () => {
+    await act(async () => {
+      render(<App />);
+    });
+    expect(await screen.findAllByText('⇅')).toHaveLength(4);
+    const [nameButton] = await screen.findAllByText('⇅');
+    fireEvent.click(nameButton)
+    expect(await screen.findAllByText('Naruto')).toBeInTheDocument
   });
 });
